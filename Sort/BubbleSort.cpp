@@ -1,11 +1,27 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
 void display(int array[], int size);
-
-
-
+void BubbleSort(int A[], int n)
+{
+    for (int i = 0; i < n - 1; ++i)
+    {
+        bool flag = false;
+        //当i=n-2时，j=n-1>n-2，是最后两个元素交换
+        for (int j = n - 1; j > i; --j)
+        {
+            if (A[j - 1] > A[j])
+            {
+                swap(A[j - 1], A[j]);
+                flag = true;
+            }
+        }
+        if (flag == false)
+        {
+            return;
+        }
+    }
+}
 void display(int array[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -23,7 +39,7 @@ int main(int argc, char **argv)
     //打印原始数据
     cout << size << endl;
     // display(array, size);
-    InsertSort(array, size);
+    BubbleSort(array, size);
     display(array, size);
     return 0;
 }
