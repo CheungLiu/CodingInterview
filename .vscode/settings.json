@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "files.autoGuessEncoding": "true",
+        "array": "cpp"
+    }
+}
