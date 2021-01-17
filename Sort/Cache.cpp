@@ -4,8 +4,6 @@ using namespace std;
 
 void display(int array[], int size);
 
-
-
 void display(int array[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -23,7 +21,7 @@ int main(int argc, char **argv)
     //打印原始数据
     cout << size << endl;
     // display(array, size);
-    InsertSort(array, size);
+    // InsertSort(array, size);
     display(array, size);
     return 0;
 }
