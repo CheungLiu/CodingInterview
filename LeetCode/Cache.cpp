@@ -25,11 +25,37 @@ struct TreeNode
 class Solution
 {
 public:
-  int getLength(ListNode *head)
+  ListNode *detectCycle(ListNode *head)
   {
+    if (head == nullptr)
+    {
+      return nullptr;
+    }
+    ListNode *pSlow = head, *pFast = head;
+    while (pFast != nullptr)
+    {
+
+      pSlow = pSlow->next;
+      if (pFast->next == nullptr)
+      {
+        return nullptr;
+      }
+
+      pFast = pFast->next->next;
+      if (pSlow == pFast)
+      {
+        ListNode *ptr = head;
+        while (ptr != pSlow)
+        {
+          ptr = ptr->next;
+          pSlow = pSlow->next;
+        }
+        return ptr;
+      }
+    }
+    return nullptr;
   }
 };
-
 template <typename T>
 class print
 {
