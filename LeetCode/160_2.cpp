@@ -1,15 +1,23 @@
 #include <iostream>
-#include <vector>
+#include <unordered_set>
 #include <algorithm>
+#include <vector>
 using namespace std;
+
+// struct ListNode
+// {
+//     int val;
+//     ListNode *next;
+//     ListNode() : val(0), next(nullptr) {}
+//     ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// };
 
 struct ListNode
 {
     int val;
     ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    ListNode(int x) : val(x), next(NULL) {}
 };
 
 struct TreeNode
@@ -25,34 +33,22 @@ struct TreeNode
 class Solution
 {
 public:
-    ListNode *detectCycle(ListNode *head)
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
     {
-        // if (head == nullptr)
-        // {
-        //   return nullptr;
-        // }
-        ListNode *pSlow = head, *pFast = head;
-        while (pFast != nullptr)
+        unordered_set<ListNode *> visited;
+        while (headA != nullptr)
         {
-
-            pSlow = pSlow->next;
-            if (pFast->next == nullptr)
+            visited.insert(headA);
+            headA = headA->next;
+        }
+        while (headB != nullptr)
+        {
+            if (visited.count(headB))
             {
-                return nullptr;
-            }
-
-            pFast = pFast->next->next;
-            if (pSlow == pFast)
-            {
-                ListNode *ptr = head;
-                while (ptr != pSlow)
-                {
-                    ptr = ptr->next;
-                    pSlow = pSlow->next;
-                }
-                return ptr;
+                return headB;
             }
         }
+
         return nullptr;
     }
 };
