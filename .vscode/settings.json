@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "files.autoGuessEncoding": "true",
-        "array": "cpp",
-        "ostream": "cpp",
-        "iostream": "cpp"
-    }
-}
