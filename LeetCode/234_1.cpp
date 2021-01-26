@@ -22,10 +22,10 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-
 class Solution
 {
     ListNode *frontPointer;
+    int flag = 0;
 
 public:
     bool recursivelyCheck(ListNode *currentNode)
@@ -36,9 +36,19 @@ public:
             {
                 return false;
             }
+            if (flag)
+            {
+                return true;
+            }
+
             if (currentNode->val != frontPointer->val)
             {
                 return false;
+            }
+            if ((frontPointer == currentNode) or (frontPointer->next == currentNode))
+            {
+                flag = 1;
+                return true;
             }
             frontPointer = frontPointer->next;
         }
@@ -51,6 +61,7 @@ public:
         return recursivelyCheck(head);
     }
 };
+
 template <typename T>
 class print
 {
@@ -64,29 +75,25 @@ public:
 int main(int argc, char **argv)
 {
     cout << "Test!" << endl;
-    int ia[] = {1, 2, 3, 4, 5};
-    vector<int> iv(ia, ia + 5);
+    int ia[] = {0, 0};
+    vector<int> iv(ia, ia + 2);
     for_each(iv.begin(), iv.end(), print<int>());
 
     Solution obj = Solution();
     ListNode *head = new ListNode(-1);
-    ListNode *p = head, *tmp = nullptr;
-    for (vector<int>::const_iterator iter = iv.begin(); iter != iv.end(); iter++)
+    ListNode *p = head;
+    for (vector<int>::const_iterator iter = iv.begin(); iter != iv.end(); ++iter)
     {
-        tmp = new ListNode(*iter);
-        head->next = tmp;
-        head = head->next;
+        auto tmp = new ListNode(*iter);
+        p->next = tmp;
+        p = p->next;
     }
 
-    head = p->next;
-    // head = obj.reverseKGroup(head, 1);
     p = head;
-    while (head)
-    {
-        cout << head->val;
-        head = head->next;
-    }
+    head = head->next;
+
+    cout << obj.isPalindrome(head) << endl;
+    free(head);
     delete p;
-    delete head;
     return 0;
 }
