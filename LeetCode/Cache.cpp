@@ -45,17 +45,16 @@ int main(int argc, char **argv)
 
   Solution obj = Solution();
   ListNode *head = new ListNode(-1);
-  ListNode *p = head, *tmp = nullptr;
+  ListNode *p = head;
   for (vector<int>::const_iterator iter = iv.begin(); iter != iv.end(); iter++)
   {
-    tmp = new ListNode(*iter);
-    head->next = tmp;
-    head = head->next;
+    auto tmp = new ListNode(*iter);
+    p->next = tmp;
+    p = p->next;
   }
-
-  head = p->next;
-  // head = obj.reverseKGroup(head, 1);
   p = head;
+  head = head->next;
+  // head = obj.reverseKGroup(head, 1);
   while (head)
   {
     cout << head->val;
